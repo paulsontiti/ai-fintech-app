@@ -6,7 +6,7 @@
 
 generator client {
   provider = "prisma-client"
-  output   = "../src/generated/prisma"
+  output   = "../generated/prisma"
 }
 
 datasource db {
@@ -15,11 +15,13 @@ datasource db {
 }
 
 model User {
-  id       String  @id @default(auto()) @map("_id") @db.ObjectId
-  fullName String
-  email    String  @unique
-  password String
-  isActive Boolean @default(true)
+  id         String  @id @default(auto()) @map("_id") @db.ObjectId
+  firstName  String
+  middleName String?
+  lastName   String
+  email      String  @unique
+  password   String
+  isActive   Boolean @default(true)
 
   wallets Wallet[]
 

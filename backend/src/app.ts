@@ -1,8 +1,5 @@
 import express from "express";
-import userRoutes from "./routes/user.routes";
-
-
-
+import authRouter from "./routes/auth.route";
 
 const app = express();
 
@@ -12,6 +9,6 @@ app.get("/", (req, res) => {
   res.send("Fintech API is running");
 });
 
-app.use("/api", userRoutes);
+app.use("/api/auth", authRouter);
 
 export default app;
