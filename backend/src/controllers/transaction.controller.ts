@@ -11,7 +11,7 @@ export const createTransaction = async (req: AuthRequest, res: Response) => {
 
     const category = (await categoriseTransaction(description)) as string;
 
-    const transaction = await prisma.transaction.create({
+    await prisma.transaction.create({
       data: {
         amount,
         description,
@@ -19,7 +19,7 @@ export const createTransaction = async (req: AuthRequest, res: Response) => {
         userId,
       },
     });
-    res.status(201).json({ transaction });
+    res.status(201).json({ category });
   } catch (err) {
     res.status(500).json({
       message: "Transaction creation failed",
