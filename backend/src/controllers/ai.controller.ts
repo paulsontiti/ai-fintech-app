@@ -73,7 +73,7 @@ export const getChatHistory = async (req: AuthRequest, res: Response) => {
       },
     });
 
-    res.json(chats);
+    res.json({chats});
   } catch (err: any) {
     res.status(500).json({ message: "Internal server error" });
   }

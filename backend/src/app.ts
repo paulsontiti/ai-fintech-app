@@ -11,7 +11,7 @@ const app = express();
 // ✅ Enable CORS
 app.use(
   cors({
-    origin: "http://localhost:3000", // frontend URL (Next.js default)
+    origin: ["http://localhost:3000", "http://localhost:3001"], // frontend URL (Next.js default)
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true, // if you want to send cookies
   }),
