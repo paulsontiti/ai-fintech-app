@@ -4,6 +4,8 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import api from "@/lib/api";
 import ProtectedRoute from "@/components/ProtectedRoute";
+import ForecastCard from "@/components/ForecastCard";
+import { ForecastChart } from "@/components/ForecastChart";
 
 export default function Dashboard() {
   const router = useRouter();
@@ -76,6 +78,9 @@ export default function Dashboard() {
               Your spending increased by 10% this week. Consider budgeting!
             </p>
           </div>
+
+          <ForecastCard />
+          <ForecastChart />
         </main>
       </div>
     </ProtectedRoute>

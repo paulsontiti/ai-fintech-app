@@ -6,6 +6,7 @@ import aiRouter from "./routes/ai.route";
 import transactionRouter from "./routes/transaction.route";
 import walletRouter from "./routes/wallet.route";
 import insightsRouter from "./routes/insights.route";
+import forecastRouter from "./routes/forecast.route";
 
 const app = express();
 
@@ -29,6 +30,7 @@ app.use("/api/user", userRouter);
 app.use("/api/ai", aiRouter);
 app.use("/api/transactions", transactionRouter);
 app.use("/api/wallet", walletRouter);
-app.use("/api/insights",insightsRouter)
+app.use("/api/insights", insightsRouter);
+app.use("/api/forecast", forecastRouter);
 
 export default app;

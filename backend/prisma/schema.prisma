@@ -44,6 +44,16 @@ model Wallet {
   updatedAt DateTime @updatedAt
 }
 
+model Forecast {
+  id               String   @id @default(auto()) @map("_id") @db.ObjectId
+  userId           String
+  predictedExpense Float
+  predictedBalance Float
+  spendingTrend    String
+  chartData        Json
+  createdAt        DateTime @default(now())
+}
+
 model Transaction {
   id          String  @id @default(auto()) @map("_id") @db.ObjectId
   userId      String  @db.ObjectId
