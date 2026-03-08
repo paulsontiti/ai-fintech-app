@@ -2,6 +2,8 @@ import type { Response } from "express";
 import prisma from "../config/prisma";
 import { categoriseTransaction } from "../services/transactionAI.service";
 import type { AuthRequest } from "../middlewares/auth.middleware";
+import { analyseTransaction } from "../services/fraudDetection.service";
+import { io } from "../server";
 
 export const createTransaction = async (req: AuthRequest, res: Response) => {
   try {
@@ -11,7 +13,7 @@ export const createTransaction = async (req: AuthRequest, res: Response) => {
 
     const category = (await categoriseTransaction(description)) as string;
 
-    await prisma.transaction.create({
+    const transaction = await prisma.transaction.create({
       data: {
         amount,
         description,
@@ -19,8 +21,21 @@ export const createTransaction = async (req: AuthRequest, res: Response) => {
         userId,
       },
     });
+
+    const fraudCheck = await analyseTransaction({
+      ...transaction,
+      currency: "NGN",
+      location: "Nigeria",
+      accountAge: "2 years",
+    });
+
+    if (fraudCheck.risk === "high") {
+      io.emit("fraud-alert", fraudCheck);
+    }
+
     res.status(201).json({ category });
   } catch (err) {
+    console.log(err);
     res.status(500).json({
       message: "Transaction creation failed",
     });

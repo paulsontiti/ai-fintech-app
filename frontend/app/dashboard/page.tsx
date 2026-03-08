@@ -6,6 +6,7 @@ import api from "@/lib/api";
 import ProtectedRoute from "@/components/ProtectedRoute";
 import ForecastCard from "@/components/ForecastCard";
 import { ForecastChart } from "@/components/ForecastChart";
+import FraudAlerts from "@/components/FraudAlert";
 
 export default function Dashboard() {
   const router = useRouter();
@@ -46,6 +47,7 @@ export default function Dashboard() {
           >
             Logout
           </button>
+          <FraudAlerts />
         </header>
 
         <main className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
